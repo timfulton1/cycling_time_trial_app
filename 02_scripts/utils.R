@@ -15,7 +15,7 @@ library(glue)
 
 load_and_process_data <- function(file_path) {
   
-  data_raw <- read_excel(file_path, col_names = c("time", "power", "rpm", "distance", "unused_2"))
+  data_raw <- read_excel(file_path, col_names = c("time", "power", "distance"))
   
   data_cleaned <- data_raw %>% 
     filter(!is.na(distance)) %>% 

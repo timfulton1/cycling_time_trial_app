@@ -1,13 +1,31 @@
-# ================================= #
-# Cycling 5k Time Trial Analysis App
-# Built by Tim Fulton, Feb 2025
-# ================================= #
+## ======================================================== ##
 
-# Source helper script
+# Purpose: UI and Server for intensity-duration shiny app
+# Author: Tim Fulton
+# Date: February, 2025
+
+## ======================================================== ##
+
+
+# Source helper script ----------------------------------------------------------
 source("02_scripts/utils.R")
 
+
+# Tags ----------------------------------------------------------
+link_github <- tags$a(
+  href = "https://github.com/timfulton1/cycling_time_trial_app",
+  target = "_blank",  
+  icon("github"), 
+  style = "color: white; font-size: 20px;"
+)
+
+
+
+
+
 # UI ------------------------------------------------------------------------
-ui <- page_sidebar(
+ui <- page_navbar(
+  title = "Cycling 5k Time Trial Analysis",
   theme = bs_theme(
     bootswatch = "flatly",
     navbar_bg = "#203C34",
@@ -16,10 +34,12 @@ ui <- page_sidebar(
     bs_theme_update(
       primary = "#25443B",
       secondary = "#5C736C",
+      success = "#25443B",
       base_font = font_google("Roboto"), 
       heading_font = font_google("Roboto")
     ),
-  title = "Cycling 5k Time Trial Analysis",
+  nav_spacer(),
+  nav_item(link_github),
   sidebar = sidebar(
     width = 300,
     title = NULL,
@@ -96,7 +116,7 @@ server <- function(input, output, session) {
   # Load the demo data if buton is selected
   observeEvent(input$load_demo, {
     
-    selected_df("01_data/test_data.xlsx")  
+    selected_df("01_data/demo_data.xlsx")  
     
     output$download_ui <- renderUI({
       # When action button is clicked, render the download button
@@ -210,12 +230,6 @@ server <- function(input, output, session) {
     digits = 2
   )
   
-  # observeEvent(input$load_demo, {
-  #   output$download_ui <- renderUI({
-  #     # When action button is clicked, render the download button
-  #     downloadButton("export_analyzed_data", label = "Download Data")
-  #   })
-  # })
   
   # Output Raw and Model Fit Table for Download
   output$export_analyzed_data <- downloadHandler(
@@ -239,6 +253,7 @@ server <- function(input, output, session) {
       write.xlsx(table_data(), file)
     }
   )
+  
 }
 
 
