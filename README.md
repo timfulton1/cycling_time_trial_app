@@ -4,8 +4,7 @@ This repo contains the code used to build the analysis application.
 
 Visit the app here: 
 
-<img width="1419" alt="time_trial_app_image" src="https://github.com/user-attachments/assets/ab1c1cc9-43a4-4153-bb00-d513950df0e5" />
-
+<img width="1416" alt="tt_app_image" src="https://github.com/user-attachments/assets/997db404-e3e5-411e-a8ca-adad39010509" />
 
 ### Background
 
