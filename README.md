@@ -8,7 +8,7 @@ Visit the app here:
 
 ### Background
 
-I developed this app to improve the accuracy and efficiency of analyzing irregular time series data acquired from a Velotron cycling ergometer. 
+I developed this app to improve the accuracy and efficiency of analyzing irregular time series data acquired from a Velotron cycle ergometer. 
 
 
 ### Usage
