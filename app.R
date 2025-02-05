@@ -1,13 +1,11 @@
 ## ======================================================== ##
-
-# Purpose: UI and Server for intensity-duration shiny app
+# Purpose: UI and Server for cycling time trial shiny app
 # Author: Tim Fulton
 # Date: February, 2025
-
 ## ======================================================== ##
 
 
-# Source helper script ----------------------------------------------------------
+# Source helper script -------------------------------------------------------
 source("02_scripts/utils.R")
 
 
@@ -20,12 +18,10 @@ link_github <- tags$a(
 )
 
 
-
-
-
 # UI ------------------------------------------------------------------------
 ui <- page_navbar(
   title = "Cycling 5k Time Trial Analysis",
+  ## theme ----
   theme = bs_theme(
     bootswatch = "flatly",
     navbar_bg = "#203C34",
@@ -40,6 +36,7 @@ ui <- page_navbar(
     ),
   nav_spacer(),
   nav_item(link_github),
+  ## sidebar ----
   sidebar = sidebar(
     width = 300,
     title = NULL,
@@ -76,6 +73,7 @@ ui <- page_navbar(
       )
     )
   ),
+  ## main body ----
   layout_columns(
     col_widths = c(8, 4),
     card(
@@ -97,6 +95,7 @@ ui <- page_navbar(
 # Server ----------------------------------------------------------------------
 server <- function(input, output, session) {
   
+  ## data uploading ----
   # Define a reactive value to store the selected data
   selected_df <- reactiveVal(NULL)
   
@@ -131,14 +130,14 @@ server <- function(input, output, session) {
     load_and_process_data(selected_df()) 
   })
   
-  
+  ## data analysis ----
   result_list <- reactive({
     
     bin <- switch(input$bin_distance,
-                   "0.01" = 0.01,
-                   "0.1" = 0.1,
-                   "0.25" = 0.25,
-                   "0.5" = 0.5,
+                  "0.01" = 0.01,
+                  "0.1" = 0.1,
+                  "0.25" = 0.25,
+                  "0.5" = 0.5,
                   "1" = 1)
     
     # Create a data frame with power values that are average across the user selected distance bin.
@@ -153,7 +152,7 @@ server <- function(input, output, session) {
     
     # Create the plot
     plot_binned <- ggplot(data_binned, aes(x = Distance, y = Power)) +
-
+      
       geom_point(
         shape = 21,
         size = 4,
@@ -208,21 +207,21 @@ server <- function(input, output, session) {
   })
   
   output$power_plot <- renderPlotly(result_list()[[2]])
-    
   
- table_data <- reactive({
-   
-   result_list()[[1]] %>% 
-     select(Distance, Power) %>% 
-     mutate(Power = as.integer(Power)) %>% 
-     rename(
-       "Distance (km)" = "Distance",
-       "Power (W)" = "Power"
-     ) %>% 
-     mutate()
-   
- })
- 
+  ## outputs ----
+  table_data <- reactive({
+    
+    result_list()[[1]] %>% 
+      select(Distance, Power) %>% 
+      mutate(Power = as.integer(Power)) %>% 
+      rename(
+        "Distance (km)" = "Distance",
+        "Power (W)" = "Power"
+      ) %>% 
+      mutate()
+    
+  })
+  
   output$power_table <-renderTable(
     table_data(),
     hover = TRUE,
