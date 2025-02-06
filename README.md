@@ -2,7 +2,7 @@
 
 This repo contains the code used to build the analysis application. 
 
-Visit the app here: 
+Visit the app here: https://timfulton.shinyapps.io/Cycling_Time_Trial_App/
 
 <img width="1416" alt="tt_app_image" src="https://github.com/user-attachments/assets/997db404-e3e5-411e-a8ca-adad39010509" />
 
