@@ -8,9 +8,9 @@ Visit the app here: https://timfulton.shinyapps.io/Cycling_Time_Trial_App/
 
 ### Background
 
-I developed this app to improve the accuracy and efficiency of analyzing irregular time series data acquired from a Velotron cycle ergometer. 
+I built this app to use in an R Shiny workshop delivered to graduate student researchers. The app analyzes irregular time series data acquired from a Velotron cycle ergometer. 
 
 
-### Usage
+### Use
 
-Upload the raw data from the Velotron using the browse button and choose the bin distance. Average Power for each bin distance is calculated and displayed in the plot and in the table, where it can also be downloaded. 
+Upload the raw data from the Velotron using the browse button and then choose the bin distance. Average Power for each bin distance is calculated and displayed in the plot and in the table, where it can also be downloaded. 
